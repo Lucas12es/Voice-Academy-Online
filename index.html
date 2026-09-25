@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Instituto Voice | Voice Academy Online — Comunicação e Oratória</title>
+<meta name="description" content="Domine a comunicação e a oratória com a Voice Academy Online do Instituto Voice. Desenvolva clareza, confiança e presença para falar e liderar com autoridade." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://institutovoice.com.br/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Instituto Voice" />
+<meta property="og:title" content="Voice Academy Online — Instituto Voice" />
+<meta property="og:description" content="A formação em comunicação e oratória para você falar com clareza, confiança e autoridade. Conheça a Voice Academy Online." />
+<meta property="og:image" content="assets/favicon.png" />
+<meta property="og:locale" content="pt_BR" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/favicon.png" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Instituto Voice",
+  "description": "Instituição referência em Comunicação e Oratória para empresários e líderes.",
+  "sameAs": ["https://instagram.com/instituto_voice"],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+55-45-99829-9255",
+    "contactType": "customer service"
+  }
+}
+</script>
+
+<style>
+  :root{
+    --navy:#0D1B2A;
+    --black:#111111;
+    --gold:#C6A75E;
+    --gold-light:#E4CE9A;
+    --white:#F5F5F5;
+    --gray:#6D6D6D;
+    --wa-green:#25D366;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--navy);
+    color:var(--white);
+    font-family:'Montserrat', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1, h2, h3, .serif{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    letter-spacing:0.3px;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  img{ max-width:100%; display:block; }
+
+  .container{
+    width:100%;
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:absolute;
+    top:0; left:0; right:0;
+    z-index:20;
+    padding:28px 0;
+  }
+  header .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo img{ height:64px; width:auto; }
+  .insta-link{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    letter-spacing:0.5px;
+    color:var(--white);
+    opacity:0.9;
+    border:1px solid rgba(198,167,94,0.5);
+    padding:8px 16px;
+    border-radius:999px;
+    transition:all .3s ease;
+  }
+  .insta-link:hover{
+    background:rgba(198,167,94,0.12);
+    border-color:var(--gold);
+    opacity:1;
+  }
+  .insta-link svg{ width:16px; height:16px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:150px 0 90px;
+    background:
+      radial-gradient(ellipse at top right, rgba(198,167,94,0.10), transparent 55%),
+      radial-gradient(ellipse at bottom left, rgba(198,167,94,0.08), transparent 55%),
+      linear-gradient(180deg, var(--navy) 0%, #0A1520 100%);
+    text-align:center;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(rgba(198,167,94,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(198,167,94,0.06) 1px, transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse at center, black 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    position:relative;
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:22px;
+    font-weight:600;
+  }
+  .hero h1{
+    position:relative;
+    font-size:clamp(32px, 5.4vw, 58px);
+    line-height:1.15;
+    max-width:820px;
+    margin:0 auto 20px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-light);
+  }
+  .hero p.lead{
+    position:relative;
+    max-width:600px;
+    margin:0 auto 44px;
+    color:rgba(245,245,245,0.75);
+    font-size:clamp(15px, 1.6vw, 18px);
+  }
+
+  /* ---------- VIDEO ---------- */
+  .video-wrap{
+    position:relative;
+    max-width:880px;
+    margin:0 auto 40px;
+  }
+  .video-frame{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    border-radius:16px;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at center, rgba(198,167,94,0.14), transparent 60%),
+      #0A1420;
+    border:1px solid rgba(198,167,94,0.45);
+    box-shadow:0 30px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .video-frame video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .video-frame.has-video .video-poster{ display:none; }
+  .video-poster{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    z-index:2;
+    padding:20px;
+  }
+  .video-poster img.mark{
+    height:56px;
+    opacity:0.85;
+    margin-bottom:4px;
+  }
+  .play-btn{
+    width:76px; height:76px;
+    border-radius:50%;
+    background:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 0 rgba(198,167,94,0.5);
+    animation:pulse 2.6s infinite;
+    cursor:pointer;
+    border:none;
+  }
+  .play-btn svg{ width:26px; height:26px; margin-left:4px; fill:var(--navy); }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(198,167,94,0.45); }
+    70%{ box-shadow:0 0 0 22px rgba(198,167,94,0); }
+    100%{ box-shadow:0 0 0 0 rgba(198,167,94,0); }
+  }
+  .video-caption{
+    font-size:12px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:rgba(245,245,245,0.45);
+  }
+  .video-corner{
+    position:absolute;
+    width:22px; height:22px;
+    border-color:var(--gold);
+    opacity:0.8;
+  }
+  .video-corner.tl{ top:12px; left:12px; border-top:1.5px solid var(--gold); border-left:1.5px solid var(--gold); }
+  .video-corner.br{ bottom:12px; right:12px; border-bottom:1.5px solid var(--gold); border-right:1.5px solid var(--gold); }
+
+  /* ---------- CTA BUTTON ---------- */
+  .btn-gold{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(135deg, var(--gold-light), var(--gold));
+    color:var(--navy);
+    font-weight:700;
+    font-size:15.5px;
+    padding:18px 38px;
+    border-radius:999px;
+    letter-spacing:0.3px;
+    box-shadow:0 14px 34px -10px rgba(198,167,94,0.55);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .btn-gold:hover{
+    transform:translateY(-2px);
+    box-shadow:0 18px 40px -8px rgba(198,167,94,0.7);
+  }
+  .btn-gold svg{ width:18px; height:18px; }
+  .cta-note{
+    display:block;
+    margin-top:16px;
+    font-size:12.5px;
+    color:rgba(245,245,245,0.45);
+    letter-spacing:0.3px;
+  }
+
+  /* ---------- STATS ---------- */
+  .stats{
+    border-top:1px solid rgba(198,167,94,0.15);
+    border-bottom:1px solid rgba(198,167,94,0.15);
+    background:rgba(255,255,255,0.015);
+  }
+  .stats .container{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:24px;
+    padding:40px 24px;
+  }
+  .stat{ text-align:center; }
+  .stat .num{
+    font-family:'Playfair Display', serif;
+    font-size:clamp(24px, 3vw, 34px);
+    color:var(--gold-light);
+    font-weight:700;
+  }
+  .stat .label{
+    font-size:12.5px;
+    color:rgba(245,245,245,0.6);
+    margin-top:6px;
+    letter-spacing:0.2px;
+  }
+
+  /* ---------- CURRICULUM ---------- */
+  .section{ padding:100px 0; }
+  .section-head{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 56px;
+  }
+  .section-tag{
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:16px;
+    display:block;
+  }
+  .section-head h2{
+    font-size:clamp(26px, 3.6vw, 38px);
+    margin-bottom:16px;
+  }
+  .section-head p{
+    color:rgba(245,245,245,0.65);
+    font-size:15.5px;
+  }
+
+  .modules{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+  }
+  .module-card{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(198,167,94,0.18);
+    border-radius:14px;
+    padding:26px 22px;
+    transition:border-color .3s ease, transform .3s ease, background .3s ease;
+  }
+  .module-card:hover{
+    border-color:rgba(198,167,94,0.55);
+    background:rgba(198,167,94,0.05);
+    transform:translateY(-4px);
+  }
+  .module-num{
+    font-family:'Playfair Display', serif;
+    font-size:14px;
+    color:var(--gold);
+    border:1px solid rgba(198,167,94,0.4);
+    width:30px; height:30px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:16px;
+  }
+  .module-card h3{
+    font-family:'Montserrat', sans-serif;
+    font-weight:600;
+    font-size:15.5px;
+    color:var(--white);
+  }
+
+  .bonus-strip{
+    margin-top:16px;
+    border:1px dashed rgba(198,167,94,0.4);
+    border-radius:14px;
+    padding:22px 26px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:14px;
+    background:rgba(198,167,94,0.04);
+  }
+  .bonus-strip .tag{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    background:var(--gold);
+    color:var(--navy);
+    font-weight:700;
+    padding:5px 12px;
+    border-radius:999px;
+  }
+  .bonus-strip span.items{
+    color:rgba(245,245,245,0.75);
+    font-size:14px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    background:linear-gradient(180deg, #0A1420, var(--navy));
+    border-top:1px solid rgba(198,167,94,0.12);
+  }
+  .about .grid{
+    display:grid;
+    grid-template-columns:1fr 1.15fr;
+    gap:56px;
+    align-items:center;
+  }
+  .about-quote{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:clamp(20px, 2.6vw, 27px);
+    line-height:1.5;
+    color:var(--gold-light);
+    border-left:2px solid var(--gold);
+    padding-left:26px;
+  }
+  .about-body span.name{
+    display:block;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+    font-weight:600;
+  }
+  .about-body h2{
+    font-size:clamp(24px, 3vw, 32px);
+    margin-bottom:18px;
+  }
+  .about-body p{
+    color:rgba(245,245,245,0.7);
+    font-size:15px;
+    margin-bottom:14px;
+  }
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    text-align:center;
+    position:relative;
+    background:
+      radial-gradient(ellipse at center top, rgba(198,167,94,0.14), transparent 60%),
+      var(--navy);
+  }
+  .final-cta h2{
+    font-size:clamp(28px, 4.2vw, 44px);
+    max-width:680px;
+    margin:0 auto 18px;
+  }
+  .final-cta p{
+    color:rgba(245,245,245,0.65);
+    max-width:520px;
+    margin:0 auto 40px;
+    font-size:15.5px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid rgba(198,167,94,0.15);
+    padding:44px 0;
+  }
+  footer .container{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+  }
+  footer .logo img{ height:48px; opacity:0.85; }
+  .footer-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    font-size:13px;
+    color:rgba(245,245,245,0.6);
+  }
+  .footer-links a{ display:flex; align-items:center; gap:7px; transition:color .25s ease; }
+  .footer-links a:hover{ color:var(--gold-light); }
+  .footer-links svg{ width:15px; height:15px; }
+  .footer-rights{
+    width:100%;
+    text-align:center;
+    font-size:12px;
+    color:rgba(245,245,245,0.35);
+    margin-top:28px;
+  }
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .wa-float{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    z-index:50;
+    width:60px; height:60px;
+    border-radius:50%;
+    background:var(--wa-green);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 26px -6px rgba(0,0,0,0.5);
+    animation:wa-pulse 2.8s infinite;
+    transition:transform .25s ease;
+  }
+  .wa-float:hover{ transform:scale(1.08); }
+  .wa-float svg{ width:30px; height:30px; fill:#fff; }
+  @keyframes wa-pulse{
+    0%{ box-shadow:0 10px 26px -6px rgba(0,0,0,0.5), 0 0 0 0 rgba(37,211,102,0.55); }
+    70%{ box-shadow:0 10px 26px -6px rgba(0,0,0,0.5), 0 0 0 16px rgba(37,211,102,0); }
+    100%{ box-shadow:0 10px 26px -6px rgba(0,0,0,0.5), 0 0 0 0 rgba(37,211,102,0); }
+  }
+  .wa-tooltip{
+    position:fixed;
+    right:92px;
+    bottom:36px;
+    z-index:50;
+    background:var(--white);
+    color:var(--navy);
+    font-size:13px;
+    font-weight:600;
+    padding:10px 16px;
+    border-radius:10px;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,0.4);
+    opacity:0;
+    transform:translateX(8px);
+    transition:opacity .3s ease, transform .3s ease;
+    pointer-events:none;
+    white-space:nowrap;
+  }
+  .wa-tooltip.show{ opacity:1; transform:translateX(0); }
+
+  /* ---------- REVEAL ANIM ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .modules{ grid-template-columns:repeat(2, 1fr); }
+    .about .grid{ grid-template-columns:1fr; gap:36px; }
+    .stats .container{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width:560px){
+    .modules{ grid-template-columns:1fr; }
+    header{ padding:20px 0; }
+    .hero{ padding:120px 0 70px; }
+    .insta-link span.txt{ display:none; }
+    .insta-link{ padding:10px; }
+    .wa-tooltip{ display:none; }
+    footer .container{ justify-content:center; text-align:center; }
+    .footer-links{ justify-content:center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="#top" class="logo">
+      <img src="assets/logo-white.png" alt="Instituto Voice" />
+    </a>
+    <a class="insta-link" href="https://instagram.com/instituto_voice" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465a4.9 4.9 0 0 1 1.772 1.153 4.9 4.9 0 0 1 1.153 1.772c.248.637.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.217 1.79-.465 2.428a4.9 4.9 0 0 1-1.153 1.772 4.9 4.9 0 0 1-1.772 1.153c-.637.248-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.217-2.428-.465a4.9 4.9 0 0 1-1.772-1.153 4.9 4.9 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.01 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.9 4.9 0 0 1 1.153-1.772A4.9 4.9 0 0 1 5.45 2.525c.637-.248 1.363-.415 2.428-.465C8.944 2.01 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.17 1.17 0 1 0 0-2.34 1.17 1.17 0 0 0 0 2.34z"/></svg>
+      <span class="txt">@instituto_voice</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Voice Academy Online</span>
+      <h1>O mundo precisa <em>ouvir</em> a sua voz.</h1>
+      <p class="lead">A formação em comunicação e oratória do Instituto Voice para você falar com clareza, confiança e autoridade — dentro e fora dos palcos.</p>
+
+      <div class="video-wrap reveal">
+        <div class="video-frame" id="videoFrame">
+          <!--
+            Para usar o vídeo final, troque este bloco por:
+            <video controls poster="assets/poster.jpg">
+              <source src="assets/video.mp4" type="video/mp4">
+            </video>
+            ou incorpore um embed do YouTube/Vimeo dentro de #videoFrame.
+          -->
+          <div class="video-poster">
+            <img class="mark" src="assets/logo-white.png" alt="Instituto Voice" />
+            <button class="play-btn" type="button" aria-label="Reproduzir vídeo">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <span class="video-caption">Vídeo de apresentação — em breve</span>
+          </div>
+          <span class="video-corner tl"></span>
+          <span class="video-corner br"></span>
+        </div>
+      </div>
+
+      <a class="btn-gold" href="https://pay.kiwify.com.br/323YtCv" target="_blank" rel="noopener">
+        Quero começar agora
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 5l7 7-7 7v-4H4v-6h9V5z"/></svg>
+      </a>
+      <span class="cta-note">Vagas limitadas · Acesso imediato após a confirmação</span>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="container">
+      <div class="stat reveal"><div class="num">+20</div><div class="label">anos de experiência</div></div>
+      <div class="stat reveal"><div class="num">+30 mil</div><div class="label">alunos formados</div></div>
+      <div class="stat reveal"><div class="num">+1 milhão</div><div class="label">pessoas impactadas</div></div>
+      <div class="stat reveal"><div class="num">27</div><div class="label">estados atendidos</div></div>
+    </div>
+  </div>
+
+  <!-- CURRICULUM -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag">O que você vai aprender</span>
+        <h2>Uma jornada completa para sua voz</h2>
+        <p>Metodologia própria, validada por mais de 30 mil alunos, para você comunicar com presença e naturalidade.</p>
+      </div>
+
+      <div class="modules">
+        <div class="module-card reveal"><div class="module-num">1</div><h3>Introdução à Comunicação e Oratória</h3></div>
+        <div class="module-card reveal"><div class="module-num">2</div><h3>Controle Emocional e Autoconfiança</h3></div>
+        <div class="module-card reveal"><div class="module-num">3</div><h3>Linguagem Corporal que Comunica</h3></div>
+        <div class="module-card reveal"><div class="module-num">4</div><h3>Construção da Mensagem</h3></div>
+        <div class="module-card reveal"><div class="module-num">5</div><h3>Voz: Domínio da Entonação</h3></div>
+        <div class="module-card reveal"><div class="module-num">6</div><h3>Técnicas de Performance</h3></div>
+        <div class="module-card reveal"><div class="module-num">7</div><h3>Comunicação Essencial no Dia a Dia</h3></div>
+        <div class="module-card reveal"><div class="module-num">8</div><h3>Erros Comuns a Evitar</h3></div>
+        <div class="module-card reveal"><div class="module-num">9</div><h3>Fechamento &amp; Próximos Passos</h3></div>
+      </div>
+
+      <div class="bonus-strip reveal">
+        <span class="tag">3 bônus inclusos</span>
+        <span class="items">Técnica A.S.D.A · Ambiência · Ferramenta de Desbloqueio de Mentalidade</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about">
+    <div class="container">
+      <div class="grid">
+        <div class="about-quote reveal">
+          “Instituto Voice não é curso. É formação de comunicadores de alto nível.”
+        </div>
+        <div class="about-body reveal">
+          <span class="name">Instituto Voice</span>
+          <h2>Referência em comunicação e oratória para empresários e líderes</h2>
+          <p>Criado por Alisson de Araújo — empresário, palestrante e especialista em Comunicação e Oratória com mais de 20 anos de experiência — o Instituto Voice já formou mais de 30 mil alunos entre profissionais, empresários, líderes e empreendedores.</p>
+          <p>Uma metodologia própria e validada, já vivida por mais de 1 milhão de pessoas em eventos por 27 estados brasileiros, agora disponível para você, no seu ritmo, através da Voice Academy Online.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section final-cta">
+    <div class="container">
+      <h2 class="reveal">Pronto para falar com autoridade?</h2>
+      <p class="reveal">Garanta agora o seu acesso à Voice Academy Online e comece a transformar a forma como você se comunica.</p>
+      <a class="btn-gold reveal" href="https://pay.kiwify.com.br/323YtCv" target="_blank" rel="noopener">
+        Garantir minha vaga
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 5l7 7-7 7v-4H4v-6h9V5z"/></svg>
+      </a>
+      <span class="cta-note reveal" style="display:block; margin-top:18px;">Pagamento 100% seguro via Kiwify</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <a href="#top" class="logo"><img src="assets/logo-white.png" alt="Instituto Voice" /></a>
+    <div class="footer-links">
+      <a href="https://instagram.com/instituto_voice" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465a4.9 4.9 0 0 1 1.772 1.153 4.9 4.9 0 0 1 1.153 1.772c.248.637.415 1.363.465 2.428.05 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.217 1.79-.465 2.428a4.9 4.9 0 0 1-1.153 1.772 4.9 4.9 0 0 1-1.772 1.153c-.637.248-1.363.415-2.428.465-1.066.05-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.217-2.428-.465a4.9 4.9 0 0 1-1.772-1.153 4.9 4.9 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.01 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.065.217-1.79.465-2.428a4.9 4.9 0 0 1 1.153-1.772A4.9 4.9 0 0 1 5.45 2.525c.637-.248 1.363-.415 2.428-.465C8.944 2.01 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.17 1.17 0 1 0 0-2.34 1.17 1.17 0 0 0 0 2.34z"/></svg>
+        @instituto_voice
+      </a>
+      <a href="https://wa.me/5545998299255" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.27-1.38a9.9 9.9 0 0 0 4.72 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.38-.49.08-1.11.11-1.79-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.54-1.16-2.94s.73-2.08.99-2.36c.26-.28.56-.35.75-.35h.54c.17 0 .4-.06.63.48.24.56.8 1.96.87 2.1.07.14.12.3.02.49-.09.19-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.28-.12.56.16.28.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.19 1.36.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.19-.28.37-.23.63-.14.26.09 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.68-.17 1.36z"/></svg>
+        45 99829-9255
+      </a>
+    </div>
+    <div class="footer-rights">© 2026 Instituto Voice. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<div class="wa-tooltip" id="waTooltip">Fale conosco no WhatsApp</div>
+<a class="wa-float" id="waFloat"
+   href="https://wa.me/5545998299255?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20Voice%20Academy%20Online."
+   target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.27-1.38a9.9 9.9 0 0 0 4.72 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.02c-.24.68-1.4 1.3-1.93 1.38-.49.08-1.11.11-1.79-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.54-1.16-2.94s.73-2.08.99-2.36c.26-.28.56-.35.75-.35h.54c.17 0 .4-.06.63.48.24.56.8 1.96.87 2.1.07.14.12.3.02.49-.09.19-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.28-.12.56.16.28.7 1.16 1.51 1.88 1.04.93 1.91 1.22 2.19 1.36.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.19-.28.37-.23.63-.14.26.09 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.68-.17 1.36z"/></svg>
+</a>
+
+<script>
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold:0.15 });
+  revealEls.forEach(el=>io.observe(el));
+
+  // Video poster play button (placeholder click -> just visual feedback until real video is added)
+  const playBtn = document.querySelector('.play-btn');
+  if(playBtn){
+    playBtn.addEventListener('click', ()=>{
+      playBtn.style.transform = 'scale(0.9)';
+      setTimeout(()=> playBtn.style.transform = 'scale(1)', 150);
+    });
+  }
+
+  // WhatsApp tooltip
+  const waFloat = document.getElementById('waFloat');
+  const waTooltip = document.getElementById('waTooltip');
+  setTimeout(()=> waTooltip.classList.add('show'), 1400);
+  setTimeout(()=> waTooltip.classList.remove('show'), 5500);
+  waFloat.addEventListener('mouseenter', ()=> waTooltip.classList.add('show'));
+  waFloat.addEventListener('mouseleave', ()=> waTooltip.classList.remove('show'));
+</script>
+
+</body>
+</html>
