@@ -467,6 +467,128 @@
     margin-top:28px;
   }
 
+  /* ---------- CHECKOUT MODAL ---------- */
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(6,11,17,0.72);
+    backdrop-filter:blur(6px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .3s ease, visibility .3s ease;
+  }
+  .modal-overlay.open{
+    opacity:1;
+    visibility:visible;
+  }
+  .modal-box{
+    position:relative;
+    width:100%;
+    max-width:440px;
+    background:linear-gradient(180deg, #101f31, var(--navy));
+    border:1px solid rgba(198,167,94,0.35);
+    border-radius:18px;
+    padding:38px 34px 32px;
+    box-shadow:0 40px 100px -20px rgba(0,0,0,0.65);
+    transform:translateY(18px) scale(0.98);
+    transition:transform .35s ease;
+  }
+  .modal-overlay.open .modal-box{
+    transform:translateY(0) scale(1);
+  }
+  .modal-close{
+    position:absolute;
+    top:16px; right:16px;
+    width:34px; height:34px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(198,167,94,0.25);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    color:var(--white);
+    transition:background .25s ease, transform .25s ease;
+  }
+  .modal-close:hover{ background:rgba(198,167,94,0.15); transform:rotate(90deg); }
+  .modal-close svg{ width:16px; height:16px; }
+  .modal-logo{
+    display:block;
+    height:46px;
+    width:auto;
+    margin:0 auto 22px;
+  }
+  .modal-box h3{
+    text-align:center;
+    font-size:22px;
+    margin-bottom:8px;
+  }
+  .modal-box p.modal-sub{
+    text-align:center;
+    font-size:13.5px;
+    color:rgba(245,245,245,0.6);
+    margin-bottom:26px;
+  }
+  .field{ margin-bottom:16px; }
+  .field label{
+    display:block;
+    font-size:12px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    margin-bottom:7px;
+    font-weight:600;
+  }
+  .field input{
+    width:100%;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:10px;
+    padding:13px 14px;
+    color:var(--white);
+    font-family:'Montserrat', sans-serif;
+    font-size:14.5px;
+    transition:border-color .25s ease, background .25s ease;
+  }
+  .field input::placeholder{ color:rgba(245,245,245,0.32); }
+  .field input:focus{
+    outline:none;
+    border-color:var(--gold);
+    background:rgba(198,167,94,0.06);
+  }
+  .field input.invalid{ border-color:#e05656; }
+  .field .field-error{
+    display:none;
+    font-size:12px;
+    color:#f08a8a;
+    margin-top:6px;
+  }
+  .field.has-error .field-error{ display:block; }
+  .field.has-error input{ border-color:#e05656; }
+
+  .modal-submit{
+    width:100%;
+    justify-content:center;
+    margin-top:6px;
+    border:none;
+    cursor:pointer;
+    font-family:'Montserrat', sans-serif;
+  }
+  .modal-privacy{
+    text-align:center;
+    font-size:11px;
+    color:rgba(245,245,245,0.4);
+    margin-top:16px;
+    line-height:1.5;
+  }
+
+  @media (max-width:480px){
+    .modal-box{ padding:32px 22px 26px; }
+  }
+
   /* ---------- WHATSAPP FLOAT ---------- */
   .wa-float{
     position:fixed;
@@ -578,7 +700,7 @@
         </div>
       </div>
 
-      <a class="btn-gold" href="https://pay.kiwify.com.br/323YtCv" target="_blank" rel="noopener">
+      <a class="btn-gold js-open-checkout" href="https://pay.kiwify.com.br/323YtCv" rel="noopener">
         Quero começar agora
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 5l7 7-7 7v-4H4v-6h9V5z"/></svg>
       </a>
@@ -646,7 +768,7 @@
     <div class="container">
       <h2 class="reveal">Pronto para falar com autoridade?</h2>
       <p class="reveal">Garanta agora o seu acesso à Voice Academy Online e comece a transformar a forma como você se comunica.</p>
-      <a class="btn-gold reveal" href="https://pay.kiwify.com.br/323YtCv" target="_blank" rel="noopener">
+      <a class="btn-gold reveal js-open-checkout" href="https://pay.kiwify.com.br/323YtCv" rel="noopener">
         Garantir minha vaga
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 5l7 7-7 7v-4H4v-6h9V5z"/></svg>
       </a>
@@ -672,6 +794,46 @@
     <div class="footer-rights">© 2026 Instituto Voice. Todos os direitos reservados.</div>
   </div>
 </footer>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+    </button>
+
+    <img class="modal-logo" src="assets/logo-white.png" alt="Instituto Voice" />
+    <h3 id="modalTitle">Falta pouco para começar</h3>
+    <p class="modal-sub">Preencha seus dados para continuar para o checkout seguro.</p>
+
+    <form id="checkoutForm" novalidate>
+      <div class="field" id="fieldName">
+        <label for="inputName">Nome completo</label>
+        <input type="text" id="inputName" name="name" placeholder="Digite seu nome completo" autocomplete="name" />
+        <span class="field-error">Digite seu nome completo.</span>
+      </div>
+
+      <div class="field" id="fieldPhone">
+        <label for="inputPhone">WhatsApp / Telefone</label>
+        <input type="tel" id="inputPhone" name="phone" placeholder="(45) 99999-9999" inputmode="numeric" autocomplete="tel" />
+        <span class="field-error">Digite um telefone válido com DDD.</span>
+      </div>
+
+      <div class="field" id="fieldEmail">
+        <label for="inputEmail">E-mail</label>
+        <input type="email" id="inputEmail" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" />
+        <span class="field-error">Digite um e-mail válido.</span>
+      </div>
+
+      <button type="submit" class="btn-gold modal-submit">
+        Ir para o checkout
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 5l7 7-7 7v-4H4v-6h9V5z"/></svg>
+      </button>
+
+      <p class="modal-privacy">Seus dados são usados apenas para preparar seu acesso à Voice Academy Online. Ao continuar, você será direcionado ao checkout seguro da Kiwify.</p>
+    </form>
+  </div>
+</div>
 
 <!-- WHATSAPP FLOAT -->
 <div class="wa-tooltip" id="waTooltip">Fale conosco no WhatsApp</div>
@@ -710,6 +872,103 @@
   setTimeout(()=> waTooltip.classList.remove('show'), 5500);
   waFloat.addEventListener('mouseenter', ()=> waTooltip.classList.add('show'));
   waFloat.addEventListener('mouseleave', ()=> waTooltip.classList.remove('show'));
+
+  // ---------- CHECKOUT MODAL ----------
+  const CHECKOUT_BASE_URL = 'https://pay.kiwify.com.br/323YtCv';
+
+  const modal = document.getElementById('checkoutModal');
+  const modalClose = document.getElementById('modalClose');
+  const checkoutForm = document.getElementById('checkoutForm');
+  const inputName = document.getElementById('inputName');
+  const inputPhone = document.getElementById('inputPhone');
+  const inputEmail = document.getElementById('inputEmail');
+  let lastFocused = null;
+
+  function openModal(){
+    lastFocused = document.activeElement;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(()=> inputName.focus(), 200);
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    if(lastFocused) lastFocused.focus();
+  }
+
+  document.querySelectorAll('.js-open-checkout').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=>{
+    if(e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  // Auto-format phone as (DD) DDDDD-DDDD while typing
+  inputPhone.addEventListener('input', ()=>{
+    let digits = inputPhone.value.replace(/\D/g, '').slice(0, 11);
+    let formatted = digits;
+    if(digits.length > 10){
+      formatted = `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7)}`;
+    } else if(digits.length > 6){
+      formatted = `(${digits.slice(0,2)}) ${digits.slice(2,6)}-${digits.slice(6)}`;
+    } else if(digits.length > 2){
+      formatted = `(${digits.slice(0,2)}) ${digits.slice(2)}`;
+    } else if(digits.length > 0){
+      formatted = `(${digits}`;
+    }
+    inputPhone.value = formatted;
+  });
+
+  function setFieldError(fieldId, hasError){
+    const field = document.getElementById(fieldId);
+    field.classList.toggle('has-error', hasError);
+  }
+
+  function isValidEmail(value){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  checkoutForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+
+    const nameVal = inputName.value.trim();
+    const phoneDigits = inputPhone.value.replace(/\D/g, '');
+    const emailVal = inputEmail.value.trim();
+
+    const nameValid = nameVal.length >= 3 && nameVal.includes(' ');
+    const phoneValid = phoneDigits.length >= 10 && phoneDigits.length <= 11;
+    const emailValid = isValidEmail(emailVal);
+
+    setFieldError('fieldName', !nameValid);
+    setFieldError('fieldPhone', !phoneValid);
+    setFieldError('fieldEmail', !emailValid);
+
+    if(!nameValid){ inputName.focus(); return; }
+    if(!phoneValid){ inputPhone.focus(); return; }
+    if(!emailValid){ inputEmail.focus(); return; }
+
+    const query = [
+      `name=${encodeURIComponent(nameVal)}`,
+      `email=${encodeURIComponent(emailVal)}`,
+      `phone=${encodeURIComponent(phoneDigits)}`
+    ].join('&');
+
+    window.location.href = `${CHECKOUT_BASE_URL}?${query}`;
+  });
+
+  // Clear error state as the person corrects each field
+  [[inputName,'fieldName'], [inputPhone,'fieldPhone'], [inputEmail,'fieldEmail']].forEach(([input, fieldId])=>{
+    input.addEventListener('input', ()=> setFieldError(fieldId, false));
+  });
 </script>
 
 </body>
