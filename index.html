@@ -25,6 +25,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+<!-- EmailJS (envia os dados da caixinha por e-mail para o cliente) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <!-- Schema.org -->
 <script type="application/ld+json">
 {
@@ -873,6 +876,32 @@
   waFloat.addEventListener('mouseenter', ()=> waTooltip.classList.add('show'));
   waFloat.addEventListener('mouseleave', ()=> waTooltip.classList.remove('show'));
 
+  // ---------- EMAILJS (envia o lead por e-mail para o cliente) ----------
+  // Preencha estas 3 informações depois de configurar sua conta em https://www.emailjs.com
+  const EMAILJS_PUBLIC_KEY  = 'ubad-jAAkfXbvxdeS';
+  const EMAILJS_SERVICE_ID  = 'service_71d1j9p';
+  const EMAILJS_TEMPLATE_ID = 'template_u7xg9mb';
+
+  const emailjsConfigured = () =>
+    typeof emailjs !== 'undefined' &&
+    !EMAILJS_PUBLIC_KEY.startsWith('COLOQUE_') &&
+    !EMAILJS_SERVICE_ID.startsWith('COLOQUE_') &&
+    !EMAILJS_TEMPLATE_ID.startsWith('COLOQUE_');
+
+  if(emailjsConfigured()){
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+
+  function sendLeadEmail(name, phoneDisplay, email){
+    if(!emailjsConfigured()) return Promise.resolve();
+    return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      from_name: name,
+      phone: phoneDisplay,
+      email: email,
+      message: `Novo lead da Voice Academy Online — Nome: ${name} | Telefone: ${phoneDisplay} | E-mail: ${email}`
+    }).catch(err => console.warn('Instituto Voice: falha ao enviar lead por e-mail.', err));
+  }
+
   // ---------- CHECKOUT MODAL ----------
   const CHECKOUT_BASE_URL = 'https://pay.kiwify.com.br/323YtCv';
 
@@ -956,13 +985,24 @@
     if(!phoneValid){ inputPhone.focus(); return; }
     if(!emailValid){ inputEmail.focus(); return; }
 
+    const submitBtn = checkoutForm.querySelector('.modal-submit');
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.7';
+
     const query = [
       `name=${encodeURIComponent(nameVal)}`,
       `email=${encodeURIComponent(emailVal)}`,
       `phone=${encodeURIComponent(phoneDigits)}`
     ].join('&');
 
-    window.location.href = `${CHECKOUT_BASE_URL}?${query}`;
+    // Dispara o e-mail para o cliente em paralelo, mas nunca deixa isso
+    // atrasar o checkout por mais de ~1.2s — a venda vem sempre primeiro.
+    const emailPromise = sendLeadEmail(nameVal, inputPhone.value.trim(), emailVal);
+    const timeout = new Promise(resolve => setTimeout(resolve, 1200));
+
+    Promise.race([emailPromise, timeout]).then(()=>{
+      window.location.href = `${CHECKOUT_BASE_URL}?${query}`;
+    });
   });
 
   // Clear error state as the person corrects each field

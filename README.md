@@ -19,10 +19,12 @@ Landing page simples, em HTML/CSS/JS puro, para divulgação da **Voice Academy 
 ```
 instituto-voice-landing/
 ├── index.html
+├── deploy-github.bat     (dois cliques para subir alterações ao GitHub)
 ├── assets/
 │   ├── logo-white.png   (logo branco, fundo transparente — usar sobre fundo escuro)
 │   ├── logo-navy.png    (logo azul-marinho, fundo transparente — usar sobre fundo claro)
 │   └── favicon.png
+├── .gitignore
 └── README.md
 ```
 
@@ -62,13 +64,33 @@ Não há build nem dependências — é um site 100% estático. Basta abrir `ind
 npx serve .
 ```
 
-## Deploy no Cloudflare Pages
+## Deploy para o GitHub (um clique)
 
-1. Suba esta pasta para um repositório no GitHub.
-2. No Cloudflare Pages, crie um novo projeto conectado a esse repositório.
-3. Build command: (deixe em branco)
-4. Output directory: `/`
-5. Deploy.
+Dê **dois cliques** em `deploy-github.bat` sempre que quiser subir as alterações para o GitHub. O script:
+
+1. Verifica se o Git está instalado.
+2. Inicializa o repositório local (na primeira vez) e aponta o remoto para `https://github.com/Lucas12es/Voice-Academy-Online.git`.
+3. Adiciona, comita e envia (`push`) todas as mudanças da pasta.
+4. Se o repositório remoto já tiver algo (README criado pelo GitHub, por exemplo), sincroniza automaticamente priorizando os arquivos locais.
+5. Mantém a janela aberta no final mostrando se deu certo ou não — se der erro, a mensagem explica o motivo.
+
+Pré-requisito: ter o [Git](https://git-scm.com/download/win) instalado e configurado (nome/e-mail) nesse computador — o script avisa caso não esteja.
+
+## Deploy automático no Cloudflare Pages
+
+Essa configuração é feita **uma única vez**. Depois disso, toda vez que você rodar o `deploy-github.bat`, o Cloudflare Pages detecta o push no GitHub sozinho e já publica a nova versão — sem precisar fazer mais nada.
+
+1. Acesse [dash.cloudflare.com](https://dash.cloudflare.com) e vá em **Workers & Pages**.
+2. Clique em **Create** → aba **Pages** → **Connect to Git**.
+3. Autorize a Cloudflare a acessar sua conta do GitHub (se ainda não tiver feito isso) e selecione o repositório `Lucas12es/Voice-Academy-Online`.
+4. Configure o projeto:
+   - **Production branch:** `main`
+   - **Framework preset:** `None`
+   - **Build command:** (deixe em branco)
+   - **Build output directory:** `/`
+5. Clique em **Save and Deploy**.
+
+Pronto — a partir daqui, cada vez que o `deploy-github.bat` enviar alterações para o GitHub, o Cloudflare Pages builda e publica automaticamente em poucos segundos, sem nenhuma ação manual. Você acompanha cada deploy na aba **Deployments** do projeto no Cloudflare.
 
 ## Próximos passos recomendados
 
