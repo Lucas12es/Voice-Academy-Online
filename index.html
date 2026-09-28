@@ -326,10 +326,14 @@
     gap:16px;
   }
   .module-card{
+    position:relative;
+    overflow:hidden;
+    min-height:172px;
     background:rgba(255,255,255,0.03);
     border:1px solid rgba(198,167,94,0.18);
     border-radius:14px;
     padding:26px 22px;
+    cursor:pointer;
     transition:border-color .3s ease, transform .3s ease, background .3s ease;
   }
   .module-card:hover{
@@ -353,6 +357,66 @@
     font-size:15.5px;
     color:var(--white);
   }
+
+  .card-hint{
+    position:absolute;
+    bottom:14px;
+    right:16px;
+    width:24px; height:24px;
+    border-radius:50%;
+    border:1px solid rgba(198,167,94,0.45);
+    color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    line-height:1;
+    transition:opacity .25s ease;
+  }
+  .card-hint svg{ width:12px; height:12px; }
+
+  .module-details{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:22px;
+    background-color:#0a1420;
+    border-top:2px solid var(--gold);
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity .3s ease, transform .3s ease;
+    pointer-events:none;
+    overflow:auto;
+  }
+  .module-details ul{ list-style:none; }
+  .module-details li{
+    position:relative;
+    padding-left:16px;
+    margin-bottom:8px;
+    font-size:12.5px;
+    line-height:1.45;
+    color:rgba(245,245,245,0.88);
+  }
+  .module-details li::before{
+    content:'—';
+    position:absolute;
+    left:0; top:0;
+    color:var(--gold);
+  }
+  .module-details li:last-child{ margin-bottom:0; }
+
+  @media (hover:hover){
+    .module-card:hover .module-details{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .module-card:hover .card-hint{ opacity:0; }
+  }
+  .module-card.is-open .module-details{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .module-card.is-open .card-hint{ opacity:0; }
 
   .bonus-strip{
     margin-top:16px;
@@ -391,14 +455,59 @@
     gap:56px;
     align-items:center;
   }
-  .about-quote{
+  .slideshow-frame{
+    position:relative;
+    border-radius:18px;
+    overflow:hidden;
+    aspect-ratio:4/5;
+    border:1px solid rgba(198,167,94,0.35);
+    box-shadow:0 30px 70px -20px rgba(0,0,0,0.55);
+    background:#0a1420;
+  }
+  .slideshow-frame .slide{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity 1.1s ease;
+  }
+  .slideshow-frame .slide.active{ opacity:1; }
+  .slideshow-scrim{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(10,20,32,0) 38%, rgba(8,15,24,0.94) 100%);
+    pointer-events:none;
+  }
+  .slideshow-quote{
+    position:absolute;
+    left:28px; right:28px; bottom:30px;
+    margin:0;
     font-family:'Playfair Display', serif;
     font-style:italic;
-    font-size:clamp(20px, 2.6vw, 27px);
+    font-size:clamp(16.5px, 1.8vw, 20px);
     line-height:1.5;
     color:var(--gold-light);
     border-left:2px solid var(--gold);
-    padding-left:26px;
+    padding-left:18px;
+  }
+  .slideshow-dots{
+    position:absolute;
+    top:18px; right:18px;
+    display:flex;
+    gap:6px;
+    z-index:2;
+  }
+  .slideshow-dots .dot{
+    width:6px; height:6px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.35);
+    transition:background .3s ease, transform .3s ease;
+  }
+  .slideshow-dots .dot.active{
+    background:var(--gold);
+    transform:scale(1.35);
   }
   .about-body span.name{
     display:block;
@@ -731,15 +840,113 @@
       </div>
 
       <div class="modules">
-        <div class="module-card reveal"><div class="module-num">1</div><h3>Introdução à Comunicação e Oratória</h3></div>
-        <div class="module-card reveal"><div class="module-num">2</div><h3>Controle Emocional e Autoconfiança</h3></div>
-        <div class="module-card reveal"><div class="module-num">3</div><h3>Linguagem Corporal que Comunica</h3></div>
-        <div class="module-card reveal"><div class="module-num">4</div><h3>Construção da Mensagem</h3></div>
-        <div class="module-card reveal"><div class="module-num">5</div><h3>Voz: Domínio da Entonação</h3></div>
-        <div class="module-card reveal"><div class="module-num">6</div><h3>Técnicas de Performance</h3></div>
-        <div class="module-card reveal"><div class="module-num">7</div><h3>Comunicação Essencial no Dia a Dia</h3></div>
-        <div class="module-card reveal"><div class="module-num">8</div><h3>Erros Comuns a Evitar</h3></div>
-        <div class="module-card reveal"><div class="module-num">9</div><h3>Fechamento &amp; Próximos Passos</h3></div>
+        <div class="module-card reveal">
+          <div class="module-num">1</div>
+          <h3>Introdução à Comunicação e Oratória</h3>
+          <span class="card-hint">+</span>
+          <div class="module-details">
+            <ul><li>Te introduzindo à jornada da comunicação e oratória</li></ul>
+          </div>
+        </div>
+        <div class="module-card reveal">
+          <div class="module-num">2</div>
+          <h3>Controle Emocional e Autoconfiança</h3>
+          <span class="card-hint">+</span>
+          <div class="module-details">
+            <ul>
+              <li>Como vencer o medo de falar em público</li>
+              <li>Técnicas práticas de respiração e relaxamento</li>
+              <li>Construção da confiança: postura, presença e mentalidade</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card reveal">
+          <div class="module-num">3</div>
+          <h3>Linguagem Corporal que Comunica</h3>
+          <span class="card-hint">+</span>
+          <div class="module-details">
+            <ul>
+              <li>Postura, gestos, expressões faciais</li>
+              <li>Movimentação no palco e uso do espaço</li>
+              <li>Como transmitir autoridade e naturalidade com o corpo</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card reveal">
+          <div class="module-num">4</div>
+          <h3>Construção da Mensagem</h3>
+          <span class="card-hint">+</span>
+          <div class="module-details">
+            <ul>
+              <li>Como organizar ideias de forma clara e envolvente</li>
+              <li>Estrutura simples para qualquer fala (início – meio – fim)</li>
+              <li>A força das histórias (storytelling)</li>
+              <li>Como criar mensagens que conectam emocionalmente</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card reveal">
+          <div class="module-num">5</div>
+          <h3>Voz: Domínio da Entonação</h3>
+          <span class="card-hint">+</span>
+          <div class="module-details">
+            <ul>
+              <li>Volume, ritmo, pausas e variação vocal</li>
+              <li>Como usar a voz para gerar atenção e emoção</li>
+              <li>Exercícios de dicção e articulação</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card reveal">
+          <div class="module-num">6</div>
+          <h3>Técnicas de Performance</h3>
+          <span class="card-hint">+</span>
+          <div class="module-details">
+            <ul>
+              <li>Como memorizar sem depender do texto</li>
+              <li>Como usar apoio visual sem perder o foco</li>
+              <li>Estratégias para prender a atenção da plateia</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card reveal">
+          <div class="module-num">7</div>
+          <h3>Comunicação Essencial no Dia a Dia</h3>
+          <span class="card-hint">+</span>
+          <div class="module-details">
+            <ul>
+              <li>Falar melhor em reuniões</li>
+              <li>Se apresentar com segurança</li>
+              <li>Melhorar conversas, vendas e negociações</li>
+              <li>Análise de perfil comportamental de clientes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card reveal">
+          <div class="module-num">8</div>
+          <h3>Erros Comuns a Evitar</h3>
+          <span class="card-hint">+</span>
+          <div class="module-details">
+            <ul>
+              <li>Falar rápido demais</li>
+              <li>Texto robotizado</li>
+              <li>Falta de intenção</li>
+              <li>Repetição excessiva de vícios de linguagem</li>
+            </ul>
+          </div>
+        </div>
+        <div class="module-card reveal">
+          <div class="module-num">9</div>
+          <h3>Bônus Exclusivos</h3>
+          <span class="card-hint">+</span>
+          <div class="module-details">
+            <ul>
+              <li>Técnica A.S.D.A — como fazer de forma simples um discurso impactante</li>
+              <li>Ambiência — como o ambiente impacta sua vida e sua evolução</li>
+              <li>Ferramenta de Desbloqueio — desbloquear mentalidade e crenças limitantes</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div class="bonus-strip reveal">
@@ -753,14 +960,28 @@
   <section class="section about">
     <div class="container">
       <div class="grid">
-        <div class="about-quote reveal">
-          “Instituto Voice não é curso. É formação de comunicadores de alto nível.”
+        <div class="about-slideshow reveal">
+          <div class="slideshow-frame">
+            <img class="slide active" src="assets/alisson-1.jpg" alt="Alisson de Araújo palestrando sobre comunicação e oratória" loading="lazy" />
+            <img class="slide" src="assets/alisson-2.jpg" alt="Alisson de Araújo, especialista em oratória do Instituto Voice" loading="lazy" />
+            <img class="slide" src="assets/alisson-3.jpg" alt="Alisson de Araújo em evento de comunicação e liderança" loading="lazy" />
+            <div class="slideshow-scrim"></div>
+            <div class="slideshow-dots">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <blockquote class="slideshow-quote">
+              “Instituto Voice não é curso. É formação de comunicadores de alto nível.”
+            </blockquote>
+          </div>
         </div>
         <div class="about-body reveal">
           <span class="name">Instituto Voice</span>
           <h2>Referência em comunicação e oratória para empresários e líderes</h2>
-          <p>Criado por Alisson de Araújo — empresário, palestrante e especialista em Comunicação e Oratória com mais de 20 anos de experiência — o Instituto Voice já formou mais de 30 mil alunos entre profissionais, empresários, líderes e empreendedores.</p>
-          <p>Uma metodologia própria e validada, já vivida por mais de 1 milhão de pessoas em eventos por 27 estados brasileiros, agora disponível para você, no seu ritmo, através da Voice Academy Online.</p>
+          <p>Criado por Alisson de Araújo — empresário, palestrante, treinador comportamental e especialista em Comunicação e Oratória, com mais de 20 anos de experiência —, o Instituto Voice já formou mais de 30 mil alunos entre profissionais, empresários, líderes e empreendedores.</p>
+          <p>Uma metodologia própria e validada, já vivida por mais de 1 milhão de pessoas em eventos por 27 estados brasileiros e em 3 países, agora disponível para você, no seu ritmo, através da Voice Academy Online.</p>
+          <p>Alisson é sócio-proprietário do Instituto Voice – Escola de Oratória, em Cascavel (PR), e autor de 3 livros sobre comunicação, liderança e desenvolvimento pessoal.</p>
         </div>
       </div>
     </div>
@@ -858,6 +1079,40 @@
     });
   }, { threshold:0.15 });
   revealEls.forEach(el=>io.observe(el));
+
+  // Slideshow de fotos na seção "sobre" (troca automática a cada 4s)
+  (function(){
+    const slides = document.querySelectorAll('.slideshow-frame .slide');
+    const dots = document.querySelectorAll('.slideshow-dots .dot');
+    if(slides.length < 2) return;
+    let idx = 0;
+    setInterval(()=>{
+      slides[idx].classList.remove('active');
+      if(dots[idx]) dots[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+      if(dots[idx]) dots[idx].classList.add('active');
+    }, 4000);
+  })();
+
+  // Módulos: no toque (celular/tablet) alterna o painel de subtópicos.
+  // No desktop (dispositivos com hover real) isso já é resolvido só no CSS.
+  const isTouchDevice = window.matchMedia('(hover: none)').matches;
+  if(isTouchDevice){
+    const moduleCards = document.querySelectorAll('.module-card');
+    moduleCards.forEach(card=>{
+      card.addEventListener('click', ()=>{
+        const wasOpen = card.classList.contains('is-open');
+        moduleCards.forEach(c=> c.classList.remove('is-open'));
+        if(!wasOpen) card.classList.add('is-open');
+      });
+    });
+    document.addEventListener('click', (e)=>{
+      if(!e.target.closest('.module-card')){
+        moduleCards.forEach(c=> c.classList.remove('is-open'));
+      }
+    });
+  }
 
   // Video poster play button (placeholder click -> just visual feedback until real video is added)
   const playBtn = document.querySelector('.play-btn');
