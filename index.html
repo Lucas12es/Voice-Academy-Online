@@ -195,19 +195,26 @@
     height:100%;
     object-fit:cover;
   }
-  .video-frame.has-video .video-poster{ display:none; }
-  .video-poster{
+  .video-overlay-btn{
+    position:absolute;
+    inset:0;
+    z-index:4;
+    width:100%;
+    height:100%;
     display:flex;
-    flex-direction:column;
     align-items:center;
-    gap:18px;
-    z-index:2;
-    padding:20px;
+    justify-content:center;
+    background:
+      linear-gradient(150deg, rgba(198,167,94,0.10), rgba(9,17,27,0.45) 60%);
+    border:none;
+    padding:0;
+    cursor:pointer;
+    transition:opacity .35s ease, visibility .35s ease;
   }
-  .video-poster img.mark{
-    height:56px;
-    opacity:0.85;
-    margin-bottom:4px;
+  .video-overlay-btn.is-hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
   }
   .play-btn{
     width:76px; height:76px;
@@ -216,8 +223,6 @@
     display:flex; align-items:center; justify-content:center;
     box-shadow:0 0 0 0 rgba(198,167,94,0.5);
     animation:pulse 2.6s infinite;
-    cursor:pointer;
-    border:none;
   }
   .play-btn svg{ width:26px; height:26px; margin-left:4px; fill:var(--navy); }
   @keyframes pulse{
@@ -795,9 +800,14 @@
 
       <div class="video-wrap reveal">
         <div class="video-frame has-video" id="videoFrame">
-          <video controls loop playsinline preload="metadata">
+          <video id="heroVideo" loop playsinline preload="metadata" poster="assets/poster.jpg">
             <source src="assets/video.mp4" type="video/mp4">
           </video>
+          <button class="video-overlay-btn" type="button" id="videoPlayBtn" aria-label="Reproduzir vídeo">
+            <span class="play-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
           <span class="video-corner tl"></span>
           <span class="video-corner br"></span>
         </div>
@@ -1105,40 +1115,19 @@
     });
   }
 
-  // Vídeo da hero: todo navegador bloqueia autoplay COM SOM antes de
-  // qualquer interação do visitante. Por isso o vídeo inicia mudo
-  // (único jeito de iniciar sozinho) e o som é ativado automaticamente
-  // no primeiro clique/toque na página — sem precisar que a pessoa
-  // interaja com o próprio vídeo.
+  // Vídeo da hero: sem controles nativos — toca (com som) ao clicar no
+  // botão de play personalizado, e esconde o botão em seguida.
   (function(){
-    const heroVideo = document.querySelector('#videoFrame video');
-    if(!heroVideo) return;
-    const tryPlay = ()=> heroVideo.play().catch(()=>{});
-    tryPlay();
-    document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) tryPlay(); });
-
-    let soundUnlocked = false;
-    const unlockSound = ()=>{
-      if(soundUnlocked) return;
-      heroVideo.muted = false;
-      heroVideo.volume = 1;
-      const attempt = heroVideo.play();
-      Promise.resolve(attempt).then(()=>{
-        if(!heroVideo.muted){ soundUnlocked = true; return; }
-        // Alguns navegadores (Safari, principalmente) ignoram silenciosamente
-        // a tentativa de desmutar um vídeo que já estava em autoplay mudo —
-        // reiniciar a reprodução dentro do mesmo clique costuma resolver.
-        heroVideo.currentTime = 0;
-        heroVideo.muted = false;
-        heroVideo.play().then(()=>{ soundUnlocked = !heroVideo.muted; }).catch(()=>{ heroVideo.muted = true; tryPlay(); });
-      }).catch(()=>{
-        heroVideo.currentTime = 0;
-        heroVideo.muted = false;
-        heroVideo.play().then(()=>{ soundUnlocked = !heroVideo.muted; }).catch(()=>{ heroVideo.muted = true; tryPlay(); });
-      });
-    };
-    ['click','touchend','keydown'].forEach(evt=>{
-      document.addEventListener(evt, unlockSound, { passive:true });
+    const heroVideo = document.getElementById('heroVideo');
+    const playBtn = document.getElementById('videoPlayBtn');
+    if(!heroVideo || !playBtn) return;
+    playBtn.addEventListener('click', ()=>{
+      heroVideo.play().then(()=>{
+        playBtn.classList.add('is-hidden');
+      }).catch(()=>{});
+    });
+    heroVideo.addEventListener('pause', ()=>{
+      if(!heroVideo.ended) playBtn.classList.remove('is-hidden');
     });
   })();
 

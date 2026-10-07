@@ -34,9 +34,9 @@ instituto-voice-landing/
 
 O vídeo final já está em uso: `assets/video.mp4`, carregado dentro de `<div class="video-frame has-video" id="videoFrame">` na seção hero, com os controles nativos do navegador (play/pausa, volume, tela cheia).
 
-Esse arquivo é uma versão comprimida do vídeo original que você colocou em `assets/1007.mp4` (que tinha 344MB em 2560x1440). O GitHub recusa qualquer arquivo acima de 100MB em um push normal, então o original foi mantido apenas no seu computador (está no `.gitignore`, não sobe para o repositório) e uma versão web — 1280x720, ~34MB, mesma qualidade visual em tela — foi gerada para uso na página. Isso também evita que a página fique pesada/lenta para o visitante.
+Esse arquivo é uma versão comprimida do vídeo original que você colocou em `assets/1007.mp4` (que tinha 344MB em 2560x1440). O original foi mantido apenas no seu computador (está no `.gitignore`, não sobe para o repositório) e uma versão web — 1280x720, ~20MB — foi gerada para uso na página.
 
-Para trocar por outro vídeo, gere uma versão comprimida (por exemplo com [HandBrake](https://handbrake.fr/), preset "Fast 1080p30" ou similar, mirando algo entre 20-50MB) e substitua `assets/video.mp4`, ou edite o `src` dentro da tag `<source>` em `index.html`.
+**Importante:** o deploy é feito via Cloudflare Workers (assets estáticos), que tem um limite rígido de **25 MiB por arquivo** — diferente do limite de 100MB do GitHub. Por isso o vídeo precisa ficar abaixo de 25 MiB (hoje está em ~20 MiB, com margem de segurança). Se trocar o vídeo, gere uma versão comprimida (por exemplo com [HandBrake](https://handbrake.fr/), preset "Fast 720p30", mirando algo entre 15-22MB) e substitua `assets/video.mp4`, ou edite o `src` dentro da tag `<source>` em `index.html`. Nunca suba um arquivo de vídeo igual ou maior que 25 MiB nessa pasta — o build do Cloudflare falha com "Asset too large".
 
 Se preferir usar um embed do YouTube ou Vimeo no lugar do arquivo local, substitua o conteúdo interno de `#videoFrame` por um iframe, por exemplo:
 
