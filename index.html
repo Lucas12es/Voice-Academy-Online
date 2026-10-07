@@ -795,7 +795,7 @@
 
       <div class="video-wrap reveal">
         <div class="video-frame has-video" id="videoFrame">
-          <video controls autoplay muted loop playsinline preload="auto">
+          <video controls loop playsinline preload="metadata">
             <source src="assets/video.mp4" type="video/mp4">
           </video>
           <span class="video-corner tl"></span>
@@ -1105,15 +1105,40 @@
     });
   }
 
-  // Vídeo da hero: garante autoplay mesmo em navegadores mais restritivos
+  // Vídeo da hero: todo navegador bloqueia autoplay COM SOM antes de
+  // qualquer interação do visitante. Por isso o vídeo inicia mudo
+  // (único jeito de iniciar sozinho) e o som é ativado automaticamente
+  // no primeiro clique/toque na página — sem precisar que a pessoa
+  // interaja com o próprio vídeo.
   (function(){
     const heroVideo = document.querySelector('#videoFrame video');
     if(!heroVideo) return;
     const tryPlay = ()=> heroVideo.play().catch(()=>{});
     tryPlay();
     document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) tryPlay(); });
-    ['click','touchstart','scroll'].forEach(evt=>{
-      document.addEventListener(evt, tryPlay, { once:true, passive:true });
+
+    let soundUnlocked = false;
+    const unlockSound = ()=>{
+      if(soundUnlocked) return;
+      heroVideo.muted = false;
+      heroVideo.volume = 1;
+      const attempt = heroVideo.play();
+      Promise.resolve(attempt).then(()=>{
+        if(!heroVideo.muted){ soundUnlocked = true; return; }
+        // Alguns navegadores (Safari, principalmente) ignoram silenciosamente
+        // a tentativa de desmutar um vídeo que já estava em autoplay mudo —
+        // reiniciar a reprodução dentro do mesmo clique costuma resolver.
+        heroVideo.currentTime = 0;
+        heroVideo.muted = false;
+        heroVideo.play().then(()=>{ soundUnlocked = !heroVideo.muted; }).catch(()=>{ heroVideo.muted = true; tryPlay(); });
+      }).catch(()=>{
+        heroVideo.currentTime = 0;
+        heroVideo.muted = false;
+        heroVideo.play().then(()=>{ soundUnlocked = !heroVideo.muted; }).catch(()=>{ heroVideo.muted = true; tryPlay(); });
+      });
+    };
+    ['click','touchend','keydown'].forEach(evt=>{
+      document.addEventListener(evt, unlockSound, { passive:true });
     });
   })();
 
