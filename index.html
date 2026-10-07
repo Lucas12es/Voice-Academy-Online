@@ -236,6 +236,8 @@
     width:22px; height:22px;
     border-color:var(--gold);
     opacity:0.8;
+    pointer-events:none;
+    z-index:3;
   }
   .video-corner.tl{ top:12px; left:12px; border-top:1.5px solid var(--gold); border-left:1.5px solid var(--gold); }
   .video-corner.br{ bottom:12px; right:12px; border-bottom:1.5px solid var(--gold); border-right:1.5px solid var(--gold); }
@@ -792,21 +794,10 @@
       <p class="lead">A formação em comunicação e oratória do Instituto Voice para você falar com clareza, confiança e autoridade — dentro e fora dos palcos.</p>
 
       <div class="video-wrap reveal">
-        <div class="video-frame" id="videoFrame">
-          <!--
-            Para usar o vídeo final, troque este bloco por:
-            <video controls poster="assets/poster.jpg">
-              <source src="assets/video.mp4" type="video/mp4">
-            </video>
-            ou incorpore um embed do YouTube/Vimeo dentro de #videoFrame.
-          -->
-          <div class="video-poster">
-            <img class="mark" src="assets/logo-white.png" alt="Instituto Voice" />
-            <button class="play-btn" type="button" aria-label="Reproduzir vídeo">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-            <span class="video-caption">Vídeo de apresentação — em breve</span>
-          </div>
+        <div class="video-frame has-video" id="videoFrame">
+          <video controls autoplay muted loop playsinline preload="auto">
+            <source src="assets/video.mp4" type="video/mp4">
+          </video>
           <span class="video-corner tl"></span>
           <span class="video-corner br"></span>
         </div>
@@ -1114,14 +1105,17 @@
     });
   }
 
-  // Video poster play button (placeholder click -> just visual feedback until real video is added)
-  const playBtn = document.querySelector('.play-btn');
-  if(playBtn){
-    playBtn.addEventListener('click', ()=>{
-      playBtn.style.transform = 'scale(0.9)';
-      setTimeout(()=> playBtn.style.transform = 'scale(1)', 150);
+  // Vídeo da hero: garante autoplay mesmo em navegadores mais restritivos
+  (function(){
+    const heroVideo = document.querySelector('#videoFrame video');
+    if(!heroVideo) return;
+    const tryPlay = ()=> heroVideo.play().catch(()=>{});
+    tryPlay();
+    document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) tryPlay(); });
+    ['click','touchstart','scroll'].forEach(evt=>{
+      document.addEventListener(evt, tryPlay, { once:true, passive:true });
     });
-  }
+  })();
 
   // WhatsApp tooltip
   const waFloat = document.getElementById('waFloat');

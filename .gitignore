@@ -2,3 +2,8 @@
 Thumbs.db
 node_modules/
 .env
+
+# Vídeo original em alta resolução (344MB) — fica só no computador local.
+# O GitHub bloqueia arquivos acima de 100MB; a página usa a versão
+# comprimida (assets/video.mp4), que já está no repositório.
+assets/1007.mp4
